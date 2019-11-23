@@ -133,9 +133,14 @@ RCT_EXPORT_MODULE();
     return NULL;
   }
   
-  NSString *dbdir = appDBPaths[atkey];
-  NSString *dbPath = [dbdir stringByAppendingPathComponent: dbFile];
-  return dbPath;
+  if ([[appDBPaths allKeys] containsObject:atkey]) {
+    NSString *dbdir = appDBPaths[atkey];
+    NSString *dbPath = [dbdir stringByAppendingPathComponent: dbFile];
+    return dbPath;
+  } else {
+    NSString *dbPath = [NSHomeDirectory() stringByAppendingPathComponent:[atkey stringByAppendingPathComponent: dbFile]];
+    return dbPath;
+  }
 }
 
 RCT_EXPORT_METHOD(echoStringValue: (NSDictionary *) options success:(RCTResponseSenderBlock)success error:(RCTResponseSenderBlock)error)
