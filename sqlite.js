@@ -70,9 +70,9 @@ function createPromiseRuntime() {
           return false;
         };
         var retValue = originalFn.call(this,...args,reverseCallbacks ? error : success, reverseCallbacks ? success : error);
-        if (returnValueExpected){
-          return resolve(retValue);
-        }
+        // if (returnValueExpected){
+        //   return resolve(retValue);
+        // }
       });
 
       return promise;
